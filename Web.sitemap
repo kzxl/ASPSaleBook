@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="" title="Các thể loại"  description="">
+        <siteMapNode url="" title="Kinh dị"  description="" />
+        <siteMapNode url="" title="Trinh thám"  description="" />
+    </siteMapNode>
+</siteMap>

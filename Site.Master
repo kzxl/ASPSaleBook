@@ -1,0 +1,124 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="Sale_Book.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - BookStores</title>
+    <link href="Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    </head>
+<body class="container">
+    <form runat="server">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    &nbsp;</div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/Index">Trang chủ</a></li>
+                        <li><a href="Gio_Hang.aspx" id="gh" runat="server">Giỏ hàng</a></li>
+                        <li><a href="IEdit.aspx" id="edit" runat="server">Quản lý sách</a></li> 
+                        <li><a href="#"><asp:Label ID="Label1" runat="server" Text="Label"></asp:Label></a></li>
+                        <li><a href="Logout.aspx" ID="logout" runat="server">Thoát</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                     
+                    <li><a><asp:TextBox ID="txttk" runat="server" CssClass="text-info" Width="180px"></asp:TextBox></a></li>
+                    <li><a><asp:Button ID="btntk" runat="server" CssClass="btn btn-info" Text="Tìm kiếm" OnClick="Button1_Click" /></a></li>|
+                    <%--<asp:LoginView runat="server" ViewStateMode="Disabled">--%>
+                        
+                            
+                                
+                                <li><a id="dky" runat="server" href="~/Dang_ky">Đăng ký</a></li>
+                                <li><a id="dnhap" runat="server" href="~/Dang_nhap_KH">Đăng nhập</a></li>
+                            </ul>
+                        
+                        <%--<LoggedInTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Chào, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                <li>
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>--%>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            <table style="width:100%;">
+                <tr>
+                    <td rowspan="3" style="width:23%">
+                        <p style="text-align: center; background-color: #3399FF; color: #FFFFFF; font-weight: bolder;">Theo thể loại</p>
+                          <br />
+                        <script>
+                            
+                        </script>
+                        <asp:DataList ID="DataList1" runat="server" DataKeyField="ma_the_loai" DataSourceID="MenuTheloaiDS">
+                            <ItemTemplate>
+                                <a href="Theloai.aspx?code=<%#Eval("ma_the_loai") %>"><%# Eval("ten_the_loai") %></a>
+                            </ItemTemplate>
+                        </asp:DataList>
+                        <asp:SqlDataSource ID="MenuTheloaiDS" runat="server" ConnectionString="<%$ ConnectionStrings:Sale_bookConnectionString %>" SelectCommand="SELECT * FROM [The_loai]"></asp:SqlDataSource>
+                        <br />
+                        <p style="text-align: center; background-color: #3399FF; color: #FFFFFF; font-weight: bolder;">Theo tác giả</p>
+                        <asp:DataList ID="DataList2" runat="server" DataSourceID="MenuTacgiaDS">
+                            <ItemTemplate>
+                                <a href="Tacgia.aspx?code=<%# Eval("ten_tac_gia") %>"><%# Eval("ten_tac_gia") %></a>
+                            </ItemTemplate>
+                        </asp:DataList>
+                        <asp:SqlDataSource ID="MenuTacgiaDS" runat="server" ConnectionString="<%$ ConnectionStrings:Sale_bookConnectionString %>" SelectCommand="SELECT [ten_tac_gia] FROM [Sach]"></asp:SqlDataSource>
+                        <p style="text-align: center; background-color: #3399FF; color: #FFFFFF; font-weight: bolder;">Theo nhà xuất bản</p>
+                        <asp:DataList ID="DataList3" runat="server" DataKeyField="ma_nxb" DataSourceID="MenuNxbDS">
+                            <ItemTemplate>
+                                <a href="Nxb.aspx?code=<%# Eval("ma_nxb") %>"><%# Eval("ten_nxb") %></a>
+                            
+                            </ItemTemplate>
+                        </asp:DataList>
+                        <asp:SqlDataSource ID="MenuNxbDS" runat="server" ConnectionString="<%$ ConnectionStrings:Sale_bookConnectionString %>" SelectCommand="SELECT * FROM [Nxb]"></asp:SqlDataSource>
+                        <br />
+                        <p style="text-align: center; background-color: #3399FF; color: #FFFFFF; font-weight: bolder;">Thống kê</p>
+                        <br />
+                        <asp:Label ID="lblconl" runat="server" Text=""></asp:Label><br />
+                        <asp:Label ID="lblcount" runat="server" Text=""></asp:Label>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td rowspan="2" class="text-center">
+                        
+                        
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> </p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>

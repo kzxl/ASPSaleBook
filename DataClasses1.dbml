@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Sale_book" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LLKAZERLL;Initial Catalog=Sale_book;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Sale_bookConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Chi_tiet" Member="Chi_tiets">
+    <Type Name="Chi_tiet">
+      <Column Name="Hinh_anh" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Tom_tat_noi_dung" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Nam_xuat_ban" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Ma_sach" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Sach_Chi_tiet" Member="Sach" ThisKey="Ma_sach" OtherKey="Ma_sach" Type="Sach" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Nha_xuat_ban" Member="Nha_xuat_bans">
+    <Type Name="Nha_xuat_ban">
+      <Column Name="Ma_nha_xuat_ban" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ten_nha_xuat_ban" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="Nha_xuat_ban_Sach" Member="Saches" ThisKey="Ma_nha_xuat_ban" OtherKey="Ma_nha_xuat_ban" Type="Sach" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sach" Member="Saches">
+    <Type Name="Sach">
+      <Column Name="Ma_sach" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ten_sach" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="So_luong_ton" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ma_the_loai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Ma_tac_gia" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Ma_nha_xuat_ban" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Sach_Chi_tiet" Member="Chi_tiets" ThisKey="Ma_sach" OtherKey="Ma_sach" Type="Chi_tiet" />
+      <Association Name="Nha_xuat_ban_Sach" Member="Nha_xuat_ban" ThisKey="Ma_nha_xuat_ban" OtherKey="Ma_nha_xuat_ban" Type="Nha_xuat_ban" IsForeignKey="true" />
+      <Association Name="Tac_gia_Sach" Member="Tac_gia" ThisKey="Ma_tac_gia" OtherKey="Ma_tac_gia" Type="Tac_gia" IsForeignKey="true" />
+      <Association Name="The_loai_Sach" Member="The_loai" ThisKey="Ma_the_loai" OtherKey="Ma_the_loai" Type="The_loai" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tac_gia" Member="Tac_gias">
+    <Type Name="Tac_gia">
+      <Column Name="Ma_tac_gia" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ten_tac_gia" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="Tac_gia_Sach" Member="Saches" ThisKey="Ma_tac_gia" OtherKey="Ma_tac_gia" Type="Sach" />
+    </Type>
+  </Table>
+  <Table Name="dbo.The_loai" Member="The_loais">
+    <Type Name="The_loai">
+      <Column Name="Ma_the_loai" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ten_the_loai" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="The_loai_Sach" Member="Saches" ThisKey="Ma_the_loai" OtherKey="Ma_the_loai" Type="Sach" />
+    </Type>
+  </Table>
+</Database>
